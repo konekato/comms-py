@@ -1,8 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-def index(request):
-    return render(request, 'top.html')
+from .models import Article
+
+def home(request):
+    articles = Article.objects.all().order_by('-id')
+    return render(request, 'home.html', context={
+        'articles': articles,
+    })
 
 @login_required
 def create(request):

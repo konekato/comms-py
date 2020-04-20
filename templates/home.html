@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+{% if user.is_authenticated %}
+{{ user.username }}
+{% endif %}
+{% for article in articles %}
+    <hr>
+    <h4>@{{ article.user.username}}</h4>
+    <p>{{ article.text }}</p>
+    <p>{{ article.created_date }}</p>
+{% endfor %}
+{% endblock %}

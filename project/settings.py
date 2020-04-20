@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'comms.apps.CommsConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,6 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # After login, redirect to
-LOGIN_REDIRECT_URL = '/c/'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_REDIRECT_URL = '/home/'
