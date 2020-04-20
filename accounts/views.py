@@ -12,7 +12,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('comms:index')
+            return redirect('comms:home')
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
