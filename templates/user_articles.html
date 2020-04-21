@@ -8,8 +8,10 @@
 {% endif %}
 {% for article in articles %}
     <hr>
-    <object><a href="{% url 'comms:user_articles' article.user.username %}"><h4>@{{ article.user.username}}</h4></a></object>
-    <p>{{ article.text }}</p>
-    <p>{{ article.created_date }}</p>
+    <a href="{% url 'comms:user_article' article.user.username article.id %}">
+        <object><a href="{% url 'comms:user_articles' article.user.username %}"><h4>@{{ article.user.username}}</h4></a></object>
+        <p>{{ article.text }}</p>
+        <p>{{ article.created_date }}</p>
+    </a>
 {% endfor %}
 {% endblock %}
