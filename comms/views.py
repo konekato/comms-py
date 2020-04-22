@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import CreateUserArticleForm
 
 from .models import Article
 
@@ -27,5 +30,17 @@ def user_article(request, username, article_id):
     })
 
 @login_required
-def create(request):
-    return render(request, 'create.html')
+def create_user_article(request):
+    form = CreateUserArticleForm()
+
+    if request.method == 'POST':
+        form = CreateUserArticleForm(request.POST)
+        print(form.data)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user_id = request.user.id
+            obj.save()
+            return HttpResponseRedirect(reverse('comms:home'))
+        else:
+            print('ERROR')
+    return render(request, 'create_user_article.html', context={'form': form})
